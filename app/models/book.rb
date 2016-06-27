@@ -5,4 +5,7 @@ class Book < ActiveRecord::Base
   belongs_to :author
   belongs_to :publisher
 
+  # Add validation
+  validates :title, presence: true
+
 end

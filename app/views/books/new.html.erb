@@ -2,6 +2,15 @@
 
 <!-- @book Needs to be passed in from the Books Controller -->
 <%= form_for @book do | f | %> <!-- Common to use f when building forms -->
+
+  <!-- Check for errors -->
+  <% if @book.errors.any? %>
+    <% @book.errors.full_messages.each do | msg | %>
+      <!-- Show errors -->
+      <div class="alert alert-danger"><%= msg %></div>
+    <% end %>
+  <% end %>
+
   <div class="form-group">
     <%= f.label :title %><br/>
     <%= f.text_field :title, class:'form-control' %><br/>
@@ -21,7 +30,7 @@
   <div class="form-group">
     <%= f.label :author %><br/>
     <!-- Creates a select box -->
-    <%= f.select :author_id, Author.all.collect { |x| [x.name, x.id]}, {:include_blank => "Select One"}, class:"form-control" %><br/><br/>
+    <%= f.select :author_id, Author.all.collect { |x| [x.first_name + " " + x.last_name, x.id]}, {:include_blank => "Select One"}, class:"form-control" %><br/><br/>
   </div>
 
   <div class="form-group">
@@ -33,6 +42,16 @@
   <div class="form-group">
     <%= f.label :format %><br/>
     <%= f.text_field :format, class:"form-control" %><br/>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :year %><br/>
+    <%= f.text_field :year, class:"form-control" %><br/>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :coverpath %><br/>
+    <%= f.text_area :coverpath, class:"form-control" %><br/>
   </div>
 
   <div class="form-group">
